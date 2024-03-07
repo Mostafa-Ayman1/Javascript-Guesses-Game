@@ -49,7 +49,6 @@
 ### Built With
 
 - [![Javascript][Javascript.com]][Javascript-url]
-- [![Laravel][Laravel.com]][Laravel-url]
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Usage
