@@ -14,7 +14,7 @@
     <br />
     <br />
     <br />
-    <a href="https://github.com/Mostafa-Ayman1/Javascript-Guesses-Game">View Demo</a>
+    <a href="https://mostafa-ayman1.github.io/Javascript-Guesses-Game/">View</a>
     ·
     <a href="https://github.com/Mostafa-Ayman1/Javascript-Guesses-Game/issues">Report Bug</a>
     ·
