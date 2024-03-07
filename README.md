@@ -59,3 +59,4 @@ Guess the correct word and you have five attempts to win. If you do not win in o
 
 [Javascript.com]: https://img.shields.io/badge/logo-javascript-blue?logo=javascript
 [Javascript-url]: https://www.javascript.com/
+[product-screenshot]: img/image.png
