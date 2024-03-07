@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --container-padding-left: 15px;
+  --container-padding-right: 15px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  /* outline: 1px solid blue; */
+}
+
+body {
+  background-image: linear-gradient(
+    to right top,
+    #0c8c81,
+    #008992,
+    #0084a2,
+    #007dae,
+    #1174b3
+  );
+}
+.container {
+  padding-left: var(--container-padding-left);
+  padding-right: var(--container-padding-right);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .container {
+    width: 575px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .container {
+    width: 745px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .container {
+    width: 991px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .container {
+    width: 1199px;
+  }
+}
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 41px);
+}
+.guess-game {
+  width: 1000px;
+  height: 500px;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  border-radius: 5px;
+  overflow: hidden;
+  h1 {
+    background-color: white;
+    text-align: center;
+    padding: 5px;
+  }
+  .content {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+
+    .inputs {
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        gap: 15px;
+        &.disabled-input {
+          opacity: 0.5;
+          pointer-events: none;
+        }
+      }
+      span {
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        flex: 1;
+      }
+      input {
+        width: 50px;
+        height: 50px;
+        font-size: 50px;
+        border: none;
+        border-bottom: 3px solid #27303f;
+        border-radius: 5px;
+        text-align: center;
+        &.in-place {
+          background-color: #18ba89;
+          color: white;
+          border-color: #18ba89;
+        }
+        &.not-in-place {
+          background-color: #f89e13;
+          color: white;
+          border-color: #f89e13;
+        }
+        &.no {
+          background-color: #27303f;
+          color: white;
+          border-color: #27303f;
+        }
+      }
+      input:focus {
+        outline: none;
+      }
+    }
+  }
+  .control {
+    display: flex;
+    gap: 10px;
+
+    .check {
+      background-color: #ff9800;
+      flex: 1;
+    }
+    .check:hover {
+      background-color: #ad6901;
+    }
+    .hint {
+      background-color: #009688;
+    }
+    .hint:hover {
+      background-color: #025a51;
+    }
+    button {
+      font-weight: bold;
+      color: white;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    }
+    .disable_button {
+      cursor: no-drop;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+  .message {
+    font-weight: bold;
+    color: white;
+    font-size: 26px;
+    text-align: center;
+    padding: 15px;
+
+    span {
+      color: #ff9800;
+    }
+  }
+  h2 {
+    margin-bottom: 15px;
+    color: white;
+  }
+  .key-colors {
+    .key-color {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: white;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    .key {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+      &.in-place {
+        background-color: #18ba89;
+      }
+      &.not-in-place {
+        background-color: #f89e13;
+      }
+      &.no {
+        background-color: #27303f;
+      }
+    }
+  }
+}
+footer {
+  padding: 10px;
+  background-color: #27303f;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}
+@media (max-width: 768px) {
+  .guess-game {
+    overflow-y: scroll;
+    .content {
+      flex-direction: column;
+      .inputs {
+        margin-bottom: 30px;
+        span {
+          font-size: 14px;
+        }
+        input {
+          width: 25px;
+          height: 25px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .control {
+      button {
+        font-weight: bold;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+      }
+    }
+  }
+}
