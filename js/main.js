@@ -28,9 +28,9 @@ config.wordToGuess =
   words[Math.floor(Math.random() * words.length)].toLowerCase();
 
 // Testing Good
-document.getElementById("test").addEventListener("click", function () {
-  NextTry();
-});
+// document.getElementById("test").addEventListener("click", function () {
+//   NextTry();
+// });
 
 const checkButton = document.getElementById("check_button");
 const hintButton = document.querySelector(".hint");
