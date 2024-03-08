@@ -9,6 +9,7 @@ let config = {
   numbersOfTries: 5,
   numbersOfLetters: 6,
   currentTry: 1,
+  hint: 3,
   wordToGuess: "",
 };
 //  Words
@@ -26,68 +27,25 @@ const words = [
 config.wordToGuess =
   words[Math.floor(Math.random() * words.length)].toLowerCase();
 
-function NextTry() {
-  const currentTryDiv = document.querySelector(`.try-${config.currentTry}`);
-  const currentTryInputs = currentTryDiv.querySelectorAll("input");
-
-  disableInputs(currentTryDiv, currentTryInputs);
-
-  if (config.currentTry < config.numbersOfTries) {
-    config.currentTry++;
-    const nextTryDiv = document.querySelector(`.try-${config.currentTry}`);
-    const nextTryInputs = nextTryDiv.querySelectorAll("input");
-    enableInputs(nextTryDiv, nextTryInputs);
-    nextTryDiv.children[1].focus();
-    return true;
-  }
-  return false;
-}
-
-function disableInputs(div, inputs) {
-  div.classList.add("disabled-input");
-  inputs.forEach((input) => {
-    input.disabled = true;
-  });
-}
-
-function disableCheckButto() {
-  const checkButton = document.getElementById("check_button");
-
-  checkButton.disabled = true;
-  checkButton.classList.add("disable_button");
-}
-
-function enableInputs(div, inputs) {
-  div.classList.remove("disabled-input");
-  inputs.forEach((input) => {
-    input.disabled = false;
-  });
-}
-
-function CreatTryDiv(id) {
-  // Create a <div> element for each try
-  let tryDiv = document.createElement("div");
-  tryDiv.classList.add(`try-${id}`);
-  tryDiv.innerHTML = `<span>Try-${id}</span>`;
-  if (id !== 1) tryDiv.classList.add("disabled-input");
-
-  return tryDiv;
-}
-function Createinput(id, letterNum) {
-  let input = document.createElement("input");
-  input.type = "text";
-  input.setAttribute("maxlength", "1");
-  /* 
-    Creat Try Dive With Name gusess-${try_number}-letter-${letter_number}
-    to make access in handle work more easy
-  */
-  input.setAttribute("id", `gusess-${id}-letter-${letterNum}`);
-  return input;
-}
-
+// Testing Good
 document.getElementById("test").addEventListener("click", function () {
   NextTry();
 });
+
+const checkButton = document.getElementById("check_button");
+const hintButton = document.querySelector(".hint");
+
+checkButton.addEventListener("click", checkWord);
+hintButton.addEventListener("click", hint);
+
+window.onload = function () {
+  Generate_Inputs();
+  hintButton.children[0].innerHTML = `(${config.hint}) `;
+};
+
+console.log(config.wordToGuess);
+
+//Functions
 function Generate_Inputs() {
   const inputsContainer = document.querySelector(".inputs");
 
@@ -145,7 +103,6 @@ function Generate_Inputs() {
     });
   });
 }
-
 function checkWord() {
   const wordToGuess = Array.from(config.wordToGuess);
   let success = true;
@@ -184,22 +141,100 @@ function checkWord() {
     win();
   }
 }
+function NextTry() {
+  const currentTryDiv = document.querySelector(`.try-${config.currentTry}`);
+  const currentTryInputs = currentTryDiv.querySelectorAll("input");
 
+  disableInputs(currentTryDiv, currentTryInputs);
+
+  if (config.currentTry < config.numbersOfTries) {
+    config.currentTry++;
+    const nextTryDiv = document.querySelector(`.try-${config.currentTry}`);
+    const nextTryInputs = nextTryDiv.querySelectorAll("input");
+    enableInputs(nextTryDiv, nextTryInputs);
+    nextTryDiv.children[1].focus();
+    return true;
+  }
+  return false;
+}
+
+function disableInputs(div, inputs) {
+  div.classList.add("disabled-input");
+  inputs.forEach((input) => {
+    input.disabled = true;
+  });
+}
+
+function disableCheckButton() {
+  const checkButton = document.getElementById("check_button");
+
+  checkButton.disabled = true;
+  checkButton.classList.add("disable_button");
+}
+
+function enableInputs(div, inputs) {
+  div.classList.remove("disabled-input");
+  inputs.forEach((input) => {
+    input.disabled = false;
+  });
+}
+
+function CreatTryDiv(id) {
+  // Create a <div> element for each try
+  let tryDiv = document.createElement("div");
+  tryDiv.classList.add(`try-${id}`);
+  tryDiv.innerHTML = `<span>Try-${id}</span>`;
+  if (id !== 1) tryDiv.classList.add("disabled-input");
+
+  return tryDiv;
+}
+function Createinput(id, letterNum) {
+  let input = document.createElement("input");
+  input.type = "text";
+  input.setAttribute("maxlength", "1");
+  /* 
+    Creat Try Dive With Name gusess-${try_number}-letter-${letter_number}
+    to make access in handle work more easy
+  */
+  input.setAttribute("id", `gusess-${id}-letter-${letterNum}`);
+  return input;
+}
 function win() {
   const message = document.querySelector(".message");
   message.innerHTML = `Great The word is <span>${config.wordToGuess}</span>`;
-  disableCheckButto();
+  disableCheckButton();
 }
+
 function lose() {
   const message = document.querySelector(".message");
-  message.innerHTML = `Opps there is no try any More`;
-  disableCheckButto();
+  message.innerHTML = `Ops there is no try any More`;
+  disableCheckButton();
 }
-const checkButton = document.getElementById("check_button");
-checkButton.addEventListener("click", checkWord);
 
-window.onload = function () {
-  Generate_Inputs();
-};
+function hint() {
+  if (config.hint > 0) {
+    // const randomCharacter =
+    //   config.wordToGuess[
+    //     Math.floor(Math.random() * config.wordToGuess.length)
+    //   ].toLowerCase();
 
-console.log(config.wordToGuess);
+    // Add Random To input
+
+    for (
+      let emptyInput = 1;
+      emptyInput <= config.numbersOfLetters;
+      emptyInput++
+    ) {
+      let input = document.getElementById(
+        `gusess-${config.currentTry}-letter-${emptyInput}`
+      );
+
+      if (input.value === "") {
+        input.value = config.wordToGuess[emptyInput - 1];
+        config.hint--;
+        hintButton.children[0].innerHTML = `(${config.hint}) `;
+        break;
+      }
+    }
+  }
+}
